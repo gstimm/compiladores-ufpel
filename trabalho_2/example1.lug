@@ -1,0 +1,15 @@
+main {
+    var int number;
+    number := 10;
+    if ( lessThanTen(number) ) {
+        return 10;
+    }
+    return number;
+}
+
+function lessThanTen ( number ) {
+    if ( 10 > number) {
+        return true
+    }
+    return false 
+}

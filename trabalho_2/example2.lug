@@ -1,0 +1,11 @@
+main{
+var bool check_status_for_discount;
+var int 10;
+
+if ( check_status_for_discount == true) {
+    print (10);
+    return 10;
+}
+print (0);
+return 0;
+}

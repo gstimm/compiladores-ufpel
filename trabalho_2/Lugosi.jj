@@ -1,0 +1,94 @@
+PARSER_BEGIN(Lugosi)
+import java.io.*;
+public class Lugosi {
+
+  public static void main(String args[]) throws ParseException,IOException {
+    
+ Lugosi analisador = new Lugosi(new FileInputStream(args[0]));
+ analisador.Lugosi();
+  }
+
+}
+
+PARSER_END(Lugosi)
+
+SKIP :
+{
+  " "
+| "\t"
+| "\n"
+| "\r"
+}
+
+TOKEN :
+{
+  <VOID: "void">
+| <MAIN: "main">
+| <ACHAVES: "{">
+| <FCHAVES: "}">
+| <APARENT: "(">
+| <FPARENT: ")">
+| <LET: "let">
+| <FLOAT: "float">
+| <PVIRGULA: ";">
+| <PRINTIO: "printIO">
+| <TRUE: "true">
+| <FALSE: "false">
+| <TYPE: ("int"| "bool")>
+| <ATTRIB: ":=">
+| <FUNC: "function">
+| <RETURN: "return">
+| <VAR: "var">
+| <WHILE: "while">
+| <DO: "do">
+| <IF: "if">
+| <VIRGULA:",">
+
+
+}
+
+TOKEN :
+{
+  <TOKEN_ID: ["a"-"z","A"-"Z"] ( ["a"-"z","A"-"Z","0"-"9"])*(("_")*( ["a"-"z","A"-"Z","0"-"9"])+)*>
+ | <TOKEN_NUMLITERAL:(["0"-"9"])+ ("."(["0"-"9"])+ )? ("E" ("+" | "-")? (["0"-"9"])+)?>
+ | <OP: ( "+" | "-" | "*" | "/" | "&&" | "||" | "<" | ">" | "==")>
+}
+
+void Lugosi () :
+{Token t;}
+{
+(
+  <VOID> { System.out.println("Palavra reservada: void");}
+| <MAIN> { System.out.println("Palavra reservada: main");}
+| <ACHAVES> { System.out.println("Abre chaves: {");}
+| <FCHAVES> { System.out.println("Fecha chaves: }");}
+| t=<TOKEN_NUMLITERAL> { System.out.println("Número: "+ t.image);}
+| t=<TOKEN_ID> { System.out.println("Identificador: "+ t.image);}
+| <APARENT> { System.out.println("Abre parenteses: (");}
+| <FPARENT> { System.out.println("Fecha parenteses: )");}
+| <LET> { System.out.println("Palavra reservada: let");}
+| <FLOAT> { System.out.println("Palavra reservada: float");}
+| <PVIRGULA> { System.out.println("Ponto e virgula: ;");}
+| <PRINTIO> { System.out.println("Palavra reservada: printIO");}
+| <TRUE> { System.out.println("Palavra reservada: true");}
+| <FALSE> { System.out.println("Palavra reservada: false");}
+| t=<TYPE> { System.out.println("Palavra reservada: " + t.image);}
+| <ATTRIB> { System.out.println("Atribuicao: :=");}
+| t=<OP> { System.out.println("Operador: " + t.image);}
+| <FUNC> { System.out.println("Palavra reservada: function");}
+| <RETURN> { System.out.println("Palavra reservada: return");}
+| <VAR> { System.out.println("Palavra reservada: var");}
+| <WHILE> { System.out.println("Palavra reservada: while");}
+| <DO> { System.out.println("Palavra reservada: do");}
+| <IF> { System.out.println("Palavra reservada: if");}
+| <VIRGULA> { System.out.println("Palavra reservada: ,");}
+
+)*
+<EOF> 
+
+
+}
+
+
+
+
