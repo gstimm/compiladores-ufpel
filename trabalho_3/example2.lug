@@ -1,0 +1,22 @@
+main{
+  var int x;
+  var float w;
+  var void as;
+  var bool is;
+x:=4;
+y:=x;
+if (y) {
+print(1);
+};
+
+do {
+  print(y);
+} while (x);
+
+while ((y == 1)) do {
+  print(x);
+};
+
+return a;
+
+}

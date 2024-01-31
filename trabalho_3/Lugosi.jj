@@ -1,0 +1,114 @@
+PARSER_BEGIN(Lugosi)
+import java.io.*;
+public class Lugosi {
+
+  public static void main(String args[]) throws ParseException,IOException {
+    
+ Lugosi parser = new Lugosi(new FileInputStream(args[0]));
+ parser.Lugosi();
+  }
+}
+
+PARSER_END(Lugosi)
+
+SKIP :
+{
+  " "
+  | "\t"
+  | "\n"
+  | "\r"
+}
+
+TOKEN:
+{
+  <MAIN: "main">
+  | <ACHAVES: "{">
+  | <FCHAVES: "}">
+  | <APARENTESES:"(">
+  | <FPARENTESES:")">
+  | <PRINT: "print">
+  | <ATRIB: ":=">
+  | <PV: ";">
+  | <IF: "if">
+  | <WHILE: "while">
+  | <DO: "do">
+  | <RETURN: "return">
+  | <VAR: "var">
+  | <TIPO: ("int"|"bool"|"void"|"float")>
+  | <TRUE: "true">
+  | <FALSE: "false">
+  | <FUNC: "function">
+  | <VIRGULA: ",">
+  | <TOKEN_ID: ["a"-"z","A"-"Z"]( ["a"-"z","A"-"Z","0"-"9"])*("_")*>
+  | <TOKEN_NUMLITERAL:(["0"-"9"])+ ("."(["0"-"9"])+ )? ("E" ("+" | "-")? (["0"-"9"])+)?>
+  | < OP: ("+" | "-" | "*" | "/" | "&&" | "||" | "<" | ">" | "==")>
+}
+
+void Lugosi (): {}
+{
+  <MAIN> <ACHAVES> VarDecl() Comandos() <FCHAVES> (Func())? <EOF> 
+}
+
+void VarDecl(): {}
+{
+  (<VAR> <TIPO> <TOKEN_ID> <PV>)*
+}
+
+void Comandos (): {}
+{
+  Com() <PV> ComandosL()
+}
+
+void ComandosL(): {}
+{
+  (Com()  <PV>  ComandosL())?
+}
+
+void Com (): {}
+{
+  (<TOKEN_ID> <ATRIB> Exp())
+  | (<IF> <APARENTESES> Exp() <FPARENTESES> <ACHAVES> ComandosL() <FCHAVES>)
+  | (<WHILE> <APARENTESES> Exp() <FPARENTESES> <DO> <ACHAVES> ComandosL() <FCHAVES>)
+  | (<DO> <ACHAVES> ComandosL() <FCHAVES> <WHILE> <APARENTESES>  Exp() <FPARENTESES>)
+  | (<RETURN> Exp())
+  | (<PRINT> <APARENTESES> Exp() <FPARENTESES>)
+}
+
+void Exp (): {}
+{
+  (<APARENTESES> Exp() <OP> Exp() <FPARENTESES>)
+  | Fator()
+}
+
+void ListaExp(): {}
+{
+  Exp() ListaExpL()
+}
+
+void ListaExpL(): {}
+{
+    (<VIRGULA> Exp() ListaExpL())?
+}
+
+void Fator(): {}
+{
+  <TOKEN_ID> FatorL()
+  | <TOKEN_NUMLITERAL>
+  | <TRUE>
+  | <FALSE> 
+}
+
+void FatorL(): {}
+{
+   (<TOKEN_ID> <APARENTESES> ListaExp() <FPARENTESES>)?
+}
+
+void Func(): {}
+{
+  (<FUNC> <TIPO> <TOKEN_ID> <APARENTESES> (ListArg())? <FPARENTESES> <ACHAVES> VarDecl() Comandos() <FCHAVES>)+
+}
+
+void ListArg(): {}
+{
+  <TIPO><TOKEN_ID> (<VIRGULA> ListArg())?
+}
