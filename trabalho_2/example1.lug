@@ -1,14 +1,11 @@
 main {
     let int number;
-    number := 10;
-    if ( lessThanTen(number) ) {
-        return 10;
-    }
-    return number;
+    number := 20;
+    printIO(isPositive(number))
 }
 
-def lessThanTen ( number ) {
-    if ( 10 > number) {
+def isPositive ( number ) {
+    if ( number > 0) {
         return true
     }
     return false 
