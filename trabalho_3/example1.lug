@@ -2,15 +2,15 @@ main{
 x:=4;
 y:=x;
 if (y) {
-print(1);
+printIO(1);
 };
 
 do {
-  print(y);
+  printIO(y);
 } while (x);
 
 while ((y == 1)) do {
-  print(x);
+  printIO(x);
 };
 
 return a;

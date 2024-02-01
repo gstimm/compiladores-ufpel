@@ -26,18 +26,18 @@ TOKEN:
   | <FCHAVES: "}">
   | <APARENTESES:"(">
   | <FPARENTESES:")">
-  | <PRINT: "print">
+  | <PRINT: "printIO">
   | <ATRIB: ":=">
   | <PV: ";">
   | <IF: "if">
   | <WHILE: "while">
   | <DO: "do">
   | <RETURN: "return">
-  | <VAR: "var">
+  | <LET: "let">
   | <TIPO: ("int"|"bool"|"void"|"float")>
   | <TRUE: "true">
   | <FALSE: "false">
-  | <FUNC: "function">
+  | <FUNC: "def">
   | <VIRGULA: ",">
   | <TOKEN_ID: ["a"-"z","A"-"Z"]( ["a"-"z","A"-"Z","0"-"9"])*("_")*>
   | <TOKEN_NUMLITERAL:(["0"-"9"])+ ("."(["0"-"9"])+ )? ("E" ("+" | "-")? (["0"-"9"])+)?>
@@ -46,12 +46,12 @@ TOKEN:
 
 void Lugosi (): {}
 {
-  <MAIN> <ACHAVES> VarDecl() Comandos() <FCHAVES> (Func())? <EOF> 
+  <MAIN> <ACHAVES> LetDecl() Comandos() <FCHAVES> (Func())? <EOF> 
 }
 
-void VarDecl(): {}
+void LetDecl(): {}
 {
-  (<VAR> <TIPO> <TOKEN_ID> <PV>)*
+  (<LET> <TIPO> <TOKEN_ID> <PV>)*
 }
 
 void Comandos (): {}
@@ -105,7 +105,7 @@ void FatorL(): {}
 
 void Func(): {}
 {
-  (<FUNC> <TIPO> <TOKEN_ID> <APARENTESES> (ListArg())? <FPARENTESES> <ACHAVES> VarDecl() Comandos() <FCHAVES>)+
+  (<FUNC> <TIPO> <TOKEN_ID> <APARENTESES> (ListArg())? <FPARENTESES> <ACHAVES> LetDecl() Comandos() <FCHAVES>)+
 }
 
 void ListArg(): {}

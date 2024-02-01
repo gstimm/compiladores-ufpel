@@ -1,20 +1,20 @@
 main{
-  var int x;
-  var float w;
-  var void as;
-  var bool is;
+  let int x;
+  let float w;
+  let void as;
+  let bool is;
 x:=4;
 y:=x;
 if (y) {
-print(1);
+printIO(1);
 };
 
 do {
-  print(y);
+  printIO(y);
 } while (x);
 
 while ((y == 1)) do {
-  print(x);
+  printIO(x);
 };
 
 return a;

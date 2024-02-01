@@ -29,16 +29,14 @@ TOKEN :
 | <APARENT: "(">
 | <FPARENT: ")">
 | <LET: "let">
-| <FLOAT: "float">
 | <PVIRGULA: ";">
 | <PRINTIO: "printIO">
 | <TRUE: "true">
 | <FALSE: "false">
-| <TYPE: ("int"| "bool")>
+| <TYPE: ("int" | "bool" | "float")>
 | <ATTRIB: ":=">
-| <FUNC: "function">
+| <FUNC: "def">
 | <RETURN: "return">
-| <VAR: "var">
 | <WHILE: "while">
 | <DO: "do">
 | <IF: "if">
@@ -67,7 +65,6 @@ void Lugosi () :
 | <APARENT> { System.out.println("Abre parenteses: (");}
 | <FPARENT> { System.out.println("Fecha parenteses: )");}
 | <LET> { System.out.println("Palavra reservada: let");}
-| <FLOAT> { System.out.println("Palavra reservada: float");}
 | <PVIRGULA> { System.out.println("Ponto e virgula: ;");}
 | <PRINTIO> { System.out.println("Palavra reservada: printIO");}
 | <TRUE> { System.out.println("Palavra reservada: true");}
@@ -75,9 +72,8 @@ void Lugosi () :
 | t=<TYPE> { System.out.println("Palavra reservada: " + t.image);}
 | <ATTRIB> { System.out.println("Atribuicao: :=");}
 | t=<OP> { System.out.println("Operador: " + t.image);}
-| <FUNC> { System.out.println("Palavra reservada: function");}
+| <FUNC> { System.out.println("Palavra reservada: def");}
 | <RETURN> { System.out.println("Palavra reservada: return");}
-| <VAR> { System.out.println("Palavra reservada: var");}
 | <WHILE> { System.out.println("Palavra reservada: while");}
 | <DO> { System.out.println("Palavra reservada: do");}
 | <IF> { System.out.println("Palavra reservada: if");}

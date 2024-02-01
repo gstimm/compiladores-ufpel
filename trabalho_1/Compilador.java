@@ -1,3 +1,5 @@
+import java.io.PrintWriter;
+
 class Compilador{
 	public static void main(String[]args) {	
 		ArvoreSintatica arv=null;
@@ -12,6 +14,10 @@ class Compilador{
 			String codigo = backend.geraCodigo(arv);
 			System.out.println(codigo);
 
+			PrintWriter writer = new PrintWriter("arquivoDeEntrada", "UTF-8");
+			writer.println(codigo);
+			writer.close();
+			 
 			double resultado = backend.geraResultado(arv);
 			System.out.println("Resultado: " + resultado);
 

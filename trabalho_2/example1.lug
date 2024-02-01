@@ -1,5 +1,5 @@
 main {
-    var int number;
+    let int number;
     number := 10;
     if ( lessThanTen(number) ) {
         return 10;
@@ -7,7 +7,7 @@ main {
     return number;
 }
 
-function lessThanTen ( number ) {
+def lessThanTen ( number ) {
     if ( 10 > number) {
         return true
     }
